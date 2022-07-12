@@ -2,7 +2,7 @@ function print(value){
     show_debug_message(log(value));
 }
 function breakpoint(value){
-    show_message(value);
+    show_message("BREAKPOINT\n"+log(value));
 }
 function log(value, indenting = 0){
     var spacing =   "       ";
