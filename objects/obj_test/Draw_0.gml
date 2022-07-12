@@ -1,0 +1,1 @@
+draw_text(32, 32, "Press [space] and then check the debug console!");
