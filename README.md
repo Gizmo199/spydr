@@ -27,3 +27,6 @@ breakpoint(value)
 ---
 
 `breakpoint()` will show a message of the logged string. It is just a wrapper for `show_message()`
+
+![bp](https://user-images.githubusercontent.com/25496262/178648288-278ceb88-a409-4fed-b703-5c217ce3890d.PNG)
+![structs](https://user-images.githubusercontent.com/25496262/178648280-b848a749-292d-4ba5-8cfe-92f3059332dc.PNG)
