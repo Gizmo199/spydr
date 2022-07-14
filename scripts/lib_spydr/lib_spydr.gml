@@ -35,7 +35,6 @@
             "Script", 
             "Object", 
             "lib_spydr", 
-            //"spydr_console",
         ];
         
         // Default settings
@@ -63,7 +62,6 @@
             }
             return text;
         }
-        
         enable_callstack = function(enabled){
             callstack_enable = enabled;
         }
@@ -236,7 +234,7 @@
                 draw_text(x + (w*8), y + (h * 16), string_replace_all(text, linebreak, ""));
             }
             draw_set_color(color.def);
-            }
+        }
     }
     
 #endregion
