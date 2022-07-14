@@ -1,28 +1,50 @@
 #region Configs
     
-    #macro INDENTING    "       "
-    #macro LINEBREAK    "^"
-    #macro TYPE_OPEN    "<"
-    #macro TYPE_CLOSE   ">"
+    #macro CALLSTACK_ENABLE     false
+    #macro CALLSTACK_DEPTH      10
     
-    #macro COLOR_DEFAULT    c_white
-    #macro COLOR_STRUCT     c_fuchsia
-    #macro COLOR_ARRAY      c_aqua
-    #macro COLOR_STRING     c_aqua
-    #macro COLOR_UNDEF      c_purple
-    #macro COLOR_METHOD     c_red
-    #macro COLOR_BOOLEAN    c_orange
-    #macro COLOR_NUMBER     c_yellow
+    #macro INDENTING            "       "
+    #macro LINEBREAK            "^"
+    #macro TYPE_OPEN            "<"
+    #macro TYPE_CLOSE           ">"
+    #macro SEPARATOR            "\n-----------------\n\n"
+    
+    #macro COLOR_DEFAULT        c_white
+    #macro COLOR_STRUCT         c_fuchsia
+    #macro COLOR_ARRAY          c_aqua
+    #macro COLOR_STRING         c_aqua
+    #macro COLOR_UNDEF          c_purple
+    #macro COLOR_METHOD         c_red
+    #macro COLOR_BOOLEAN        c_orange
+    #macro COLOR_NUMBER         c_yellow
 
 #endregion
 
 function print(value){
 	var l = log(value);
-    show_debug_message(string_replace_all(l, LINEBREAK, "\n"));
+    var c = debug_get_callstack(CALLSTACK_DEPTH);
+    var t = "";
+    if ( CALLSTACK_ENABLE ) {
+        for ( var i=0; i<array_length(c)-1; i++ ) t+="call "+string(i)+" ["+string(c[i])+"\n";
+        t = string_replace_all(t, ":", "] line: ");
+        t = string_replace_all(t, "gml_Object_", "");
+        t = string_replace_all(t, "gml_Script_", "");
+        t += SEPARATOR;
+    }   
+    show_debug_message(t+string_replace_all(l, LINEBREAK, "\n"));
 }
 function breakpoint(value){
     var l = log(value);
-	show_message("BREAKPOINT\n\n"+string_replace_all(l, LINEBREAK, "\n"));
+    var c = debug_get_callstack(CALLSTACK_DEPTH);
+    var t = "";
+    if ( CALLSTACK_ENABLE ){
+        for ( var i=0; i<array_length(c)-1; i++ ) t+="call "+string(i)+" ["+string(c[i])+"\n";
+        t = string_replace_all(t, ":", "] line: ");
+        t = string_replace_all(t, "gml_Object_", "");
+        t = string_replace_all(t, "gml_Script_", "");
+        t = SEPARATOR + t + SEPARATOR;
+    }
+	show_message("BREAKPOINT\n"+t+string_replace_all(l, LINEBREAK, "\n"));
 }
 function log_this(value){
     
