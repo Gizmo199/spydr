@@ -1,5 +1,4 @@
 object.age--;
-tolog = spydr.log(object);
 
-spydr.print(tolog);
-spydr.breakpoint(tolog);
+spydr.print(object);
+spydr.breakpoint(object);
