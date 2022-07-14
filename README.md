@@ -32,6 +32,16 @@ spydr.draw()
 ---
 This will draw the spydr debug console. You can change the position by setting `spydr.x` or `spydr.y` wherever you want. You can also call this function using `spydr_draw(x, y)`
 
+spydr.enable_callstack()
+---
+This will enable spydr to also show the callstack before the value being debugged. It will look something like this:
+```
+Spydr callstack
+call 0 [___spydr_console____2638_spydr_console___] line: 72
+call 1 [___spydr_console____3051_spydr_console___] line: 83
+call 2 [__obj_test_KeyPress_32] line: 3
+```
+
 ![Capture2](https://user-images.githubusercontent.com/25496262/179077706-a36c4ec8-5642-4752-9414-a31ee432673c.PNG)
 ![Capture](https://user-images.githubusercontent.com/25496262/179077716-3d6cc4fa-e1b1-4c11-8866-f4686e8e54f6.PNG)
 
