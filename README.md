@@ -16,7 +16,7 @@ With these 3 functions you can input nearly any game maker data into them and ge
 spydr.log(value)
 ---
 
-`log()` will only return a string. This could be useful for drawing text in-game or whatever! `log` is the 'parser' so to speak and is used in conjunction with the other functions. You can also call this function using `spydr_log(value)`
+`spydr.log()` will only return a string. This could be useful for drawing text in-game or whatever! `log` is the 'parser' so to speak and is used in conjunction with the other functions. You can also call this function using `spydr_log(value)`
 
 spydr.print(value)
 ---
