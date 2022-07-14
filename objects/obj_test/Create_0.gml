@@ -1,9 +1,10 @@
+spydr_enable_callstack(true);
 function test_struct() constructor{
     name = ["Gizmo", "199"];
     age  = 30;
 	
 	// add a break point. will show only name and age
-	breakpoint(self);	
+	spydr.breakpoint(self);	
 	
     clothes = {
         shirt   : "plain",
@@ -13,7 +14,7 @@ function test_struct() constructor{
 	
 	some_func = function(){
 		age -= 10;
-		breakpoint(self);
+		spydr.breakpoint(self);
 	}
 }
 

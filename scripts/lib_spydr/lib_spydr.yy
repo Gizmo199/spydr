@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "better debug",
-    "path": "better debug.yyp",
+    "name": "Spydr",
+    "path": "folders/Spydr.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scr_debug",
+  "name": "lib_spydr",
   "tags": [],
   "resourceType": "GMScript",
 }
