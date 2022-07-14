@@ -1,7 +1,7 @@
 About
 ===
 
-Better debuggin makes it so that you can easily debug structs, arrays, variables, and more in a way that will show the data in a more cohesive way. 
+Spydr makes it so that you can easily debug structs, arrays, variables, and more in a way that will show the data in a more cohesive way. 
 
 How to use
 ===
