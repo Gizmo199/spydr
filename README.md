@@ -6,10 +6,12 @@ Spydr makes it so that you can easily debug structs, arrays, variables, and more
 How to use
 ===
 
-There are 3 functions included that make debugging much more readable and gives you more control. 
+There are 5 functions included that make debugging much more readable and gives you more control. 
 - **spydr.log()**
 - **spydr.print()**
 - **spydr.breakpoint()**
+- **spydr.draw()**
+- **spydr.enable_callstack()**
 
 With these 3 functions you can input nearly any game maker data into them and get a more readable outcome!
 
