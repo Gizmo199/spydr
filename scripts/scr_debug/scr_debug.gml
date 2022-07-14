@@ -7,7 +7,7 @@
     #macro LINEBREAK            "^"
     #macro TYPE_OPEN            "<"
     #macro TYPE_CLOSE           ">"
-    #macro SEPARATOR            "\n-----------------\n\n"
+    #macro SEPARATOR            "-----------------\n"
     
     #macro COLOR_DEFAULT        c_white
     #macro COLOR_STRUCT         c_fuchsia
@@ -25,6 +25,7 @@ function print(value){
     var c = debug_get_callstack(CALLSTACK_DEPTH);
     var t = "";
     if ( CALLSTACK_ENABLE ) {
+        t = "CALLSTACK\n";
         for ( var i=0; i<array_length(c)-1; i++ ) t+="call "+string(i)+" ["+string(c[i])+"\n";
         t = string_replace_all(t, ":", "] line: ");
         t = string_replace_all(t, "gml_Object_", "");
@@ -38,6 +39,7 @@ function breakpoint(value){
     var c = debug_get_callstack(CALLSTACK_DEPTH);
     var t = "";
     if ( CALLSTACK_ENABLE ){
+        t = "CALLSTACK\n";
         for ( var i=0; i<array_length(c)-1; i++ ) t+="call "+string(i)+" ["+string(c[i])+"\n";
         t = string_replace_all(t, ":", "] line: ");
         t = string_replace_all(t, "gml_Object_", "");
