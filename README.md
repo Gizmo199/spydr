@@ -28,6 +28,6 @@ breakpoint(value)
 
 `breakpoint()` will show a message of the logged string. It is just a wrapper for `show_message()`
 
-![Capture2](https://user-images.githubusercontent.com/25496262/179073094-b7ce9f48-9d29-4a30-a66e-ee147c761d80.PNG)
-![Capture](https://user-images.githubusercontent.com/25496262/179073091-0222b5cd-233f-4ebf-a598-1ce9ea3809cd.PNG)
+![Capture2](https://user-images.githubusercontent.com/25496262/179077706-a36c4ec8-5642-4752-9414-a31ee432673c.PNG)
+![Capture](https://user-images.githubusercontent.com/25496262/179077716-3d6cc4fa-e1b1-4c11-8866-f4686e8e54f6.PNG)
 
