@@ -1,6 +1,6 @@
 #region Configs
     
-    #macro CALLSTACK_ENABLE     false
+    #macro CALLSTACK_ENABLE     true
     #macro CALLSTACK_DEPTH      10
     
     #macro INDENTING            "       "
@@ -45,24 +45,6 @@ function breakpoint(value){
         t = SEPARATOR + t + SEPARATOR;
     }
 	show_message("BREAKPOINT\n"+t+string_replace_all(l, LINEBREAK, "\n"));
-}
-function log_this(value){
-    
-    var text = "";
-    var oname = object_get_name(self.object_index);
-    
-    if ( oname == "<undefined>" ){
-        oname = typeof(self);
-    }
-    var names = variable_instance_get_names(self);
-    for ( var i=0; i<array_length(names); i++ ){
-        if ( value == variable_instance_get(self, names[i]) ){
-            text += oname + " : '"+names[i]+"'^";
-            break;
-        }
-    }
-    text += log(value, 0);
-    return text;
 }
 function log(value, indenting = 0){
     var spacing =   INDENTING;

@@ -1,5 +1,5 @@
 object.age--;
-tolog = log_this(object);
+tolog = log(object);
 
 print(tolog);
 breakpoint(tolog);
