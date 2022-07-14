@@ -13,7 +13,7 @@ There are 5 functions included that make debugging much more readable and gives 
 - **spydr.draw()**
 - **spydr.enable_callstack()**
 
-With these 3 functions you can input nearly any game maker data into them and get a more readable outcome!
+With these 5 functions you can input nearly any game maker data into them and get a more readable outcome!
 
 spydr.log(value)
 ---
