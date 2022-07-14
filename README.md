@@ -42,6 +42,6 @@ call 1 [___spydr_console____3051_spydr_console___] line: 83
 call 2 [__obj_test_KeyPress_32] line: 3
 ```
 
-![Capture2](https://user-images.githubusercontent.com/25496262/179077706-a36c4ec8-5642-4752-9414-a31ee432673c.PNG)
-![Capture](https://user-images.githubusercontent.com/25496262/179077716-3d6cc4fa-e1b1-4c11-8866-f4686e8e54f6.PNG)
+![Capture](https://user-images.githubusercontent.com/25496262/179115660-0a4e643b-3e12-4a78-83cf-8d75d979baf9.PNG)
+![Capture2](https://user-images.githubusercontent.com/25496262/179115667-cf313d6b-8b39-4051-8f63-bed08faa0e38.PNG)
 
