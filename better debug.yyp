@@ -1,8 +1,8 @@
 {
   "resources": [
-    {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":2,},
-    {"id":{"name":"scr_debug","path":"scripts/scr_debug/scr_debug.yy",},"order":1,},
-    {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},"order":0,},
+    {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":1,},
+    {"id":{"name":"scr_debug","path":"scripts/scr_debug/scr_debug.yy",},"order":0,},
+    {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},"order":2,},
   ],
   "Options": [
     {"name":"HTML5","path":"options/html5/options_html5.yy",},

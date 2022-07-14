@@ -1,22 +1,60 @@
+#region Configs
+    
+    #macro INDENTING    "       "
+    #macro LINEBREAK    "^"
+    #macro TYPE_OPEN    "<"
+    #macro TYPE_CLOSE   ">"
+    
+    #macro COLOR_DEFAULT    c_white
+    #macro COLOR_STRUCT     c_fuchsia
+    #macro COLOR_ARRAY      c_aqua
+    #macro COLOR_STRING     c_aqua
+    #macro COLOR_UNDEF      c_purple
+    #macro COLOR_METHOD     c_red
+    #macro COLOR_BOOLEAN    c_orange
+    #macro COLOR_NUMBER     c_yellow
+
+#endregion
+
 function print(value){
-    show_debug_message(log(value));
+	var l = log(value);
+    show_debug_message(string_replace_all(l, LINEBREAK, "\n"));
 }
 function breakpoint(value){
-    show_message("BREAKPOINT\n\n"+log(value));
+    var l = log(value);
+	show_message("BREAKPOINT\n\n"+string_replace_all(l, LINEBREAK, "\n"));
+}
+function log_this(value){
+    
+    var text = "";
+    var oname = object_get_name(self.object_index);
+    
+    if ( oname == "<undefined>" ){
+        oname = typeof(self);
+    }
+    var names = variable_instance_get_names(self);
+    for ( var i=0; i<array_length(names); i++ ){
+        if ( value == variable_instance_get(self, names[i]) ){
+            text += oname + " : '"+names[i]+"'^";
+            break;
+        }
+    }
+    text += log(value, 0);
+    return text;
 }
 function log(value, indenting = 0){
-    var spacing =   "       ";
+    var spacing =   INDENTING;
     var indent  =   indenting;
     var text    =   "";
-    
+
     switch(typeof(value)){
         case "struct"   : 
             var struct = value;
             var base = "";
-            repeat(indent) base += spacing;
-            var idt = base + spacing;
+            repeat(indent) base += INDENTING;
+            var idt = base + INDENTING;
             
-            text += base + "{\n";
+            text += base + "{"+LINEBREAK;
             var key = variable_struct_get_names(value);
             var len = variable_struct_names_count(value);
             
@@ -25,10 +63,13 @@ function log(value, indenting = 0){
                 var val  = struct[$ name];
                 
                 // Add text
-                text += idt+name + " : "
-                switch(typeof(val)){
+                var type = typeof(val);
+                var prfx = TYPE_OPEN+type+TYPE_CLOSE+" ";
+                text += idt+prfx+name +" : "
+                
+                switch(type){
                     case "bool"     : text += ( val ) ? "true" : "false"; break;
-                    case "struct"   : text += "\n"+log(val, indent+1); break;
+                    case "struct"   : text += LINEBREAK+log(val, indent+1); break;
                     case "array"    : text += "["+ log(val, indent); break;
                     case "undefined": text += "undefined"; break;
                     case "number"   : text += string(val); break;
@@ -38,9 +79,8 @@ function log(value, indenting = 0){
                 
                 // Endings
                 var add = "";
-                if ( i != len-1 ) add = ",\n";
-                else if ( indent == 0 ) add = "";
-                else add = "\n";
+                if ( i != len-1 ) add = ","+LINEBREAK;
+                else add = LINEBREAK;
                 text += add;
             }
             text += base + "}";
@@ -48,39 +88,91 @@ function log(value, indenting = 0){
         case "array"    : 
             var array = value;
             var len  = array_length(array);
-            var idt  = ""; repeat(indent) idt += spacing;
+            var idt  = ""; repeat(indent) idt += INDENTING;
             text += idt;
             
             for ( var i=0; i<len; i++ ){
                 
                 // Add text
-                value = array[i];
-                switch(typeof(value)){
-                    case "bool"     : text += ( value ) ? "true" : "false"; break;
-                    case "struct"   : text += "\n"+ log(value, indent+1); break;
-                    case "array"    : text += "[" + log(value, indent+1); break;
-                    case "number"   : text += string(value); break;
+                var val = array[i];
+                var type = typeof(val);
+                
+                var prfx = TYPE_OPEN+type+TYPE_CLOSE+" ";
+                text += prfx;
+                
+                switch(type){
+                    case "bool"     : text += ( val ) ? "true" : "false"; break;
+                    case "struct"   : text += "^"+ log(val, indent+1); break;
+                    case "array"    : text += log(val, indent+1); break;
+                    case "number"   : text += string(val); break;
                     case "undefined": text += "undefined"; break;
                     case "method"   : text += "function"; break;
-                    case "string"   : text += value; break;
+                    case "string"   : text += val; break;
                 }
                 
                 // Endings
                 var add = "";
-                if ( i != len-1 ) add = ", ";
+                if ( i != len-1 ) add = ",";
                 else if ( indent == 0 ) add = "";
-                else add = "\n";
+                else add = LINEBREAK;
                 text += add;
             }
-            text +="]\n";
+            text +="]";
+        break;
+        case "method"   : 
+            
+            text += "function";
+            
         break;
         case "bool"     : text += ( value ) ? "true" : "false"; break;
         case "number"   : text += string(value); break;
         case "undefined": text += "undefined"; break;
-        case "method"   : text += "function"; break;
         case "string"   : text += value; break;
     }
     
     // Return string
     return text;
+}
+function draw_log(_x, _y, _log){
+    
+    var col = c_white;
+    var w = 0;
+    var h = 0;
+    
+    for ( var i=1; i<string_length(_log)+1; i++){
+        var text = "";
+        var char = string_char_at(_log, i);
+        
+        var t = "";
+        if ( char == TYPE_OPEN && string_char_at(_log, i+1) != " " ){
+            var t = "";
+            var j = 0;
+            repeat(20){
+                var c = string_char_at(_log, i+1+j);
+                if ( c == TYPE_CLOSE ) {j++; break;}
+                t += c;
+                j++;
+            }
+            i += j;
+            w-=2;
+            switch(t){
+                case "struct": col      = COLOR_STRUCT; break;
+                case "method": col      = COLOR_METHOD; break;
+                case "array": col       = COLOR_ARRAY; break;
+                case "string": col      = COLOR_STRING; break;
+                case "number": col      = COLOR_NUMBER; break;
+                case "bool": col        = COLOR_BOOLEAN; break;
+                case "undefined": col   = COLOR_UNDEF; break;
+                default: col            = COLOR_DEFAULT;
+            }
+            draw_set_color(col);
+        } else text += char;
+        
+        w++;
+        if ( char == LINEBREAK ){
+            h+=1;
+            w=0;
+        }
+        draw_text(_x + (w*8), _y + (h * 16), string_replace_all(text, LINEBREAK, ""));
+    }
 }

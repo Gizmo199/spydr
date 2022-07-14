@@ -1,2 +1,5 @@
-object ??= new test_struct();
-print(object);
+object.age--;
+tolog = log_this(object);
+
+print(tolog);
+breakpoint(tolog);
