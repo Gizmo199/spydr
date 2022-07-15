@@ -29,14 +29,17 @@ With these 5 functions you can input nearly any game maker data into them and ge
 
 .cprint(value)
 ---
-**cprint** stands for 'cache print'. `spydr.cprint()` will show a debug message that is constantly updated. Instead of having a bunch of idividual calls like this:
+**cprint** stands for 'cache print'. `spydr.cprint()` will show a debug message in the 'spydr draw console' that is constantly updated. Instead of having a bunch of idividual calls like this:
 ```
 [mouse_position, 100, 100]
 [mouse_position, 100, 200]
 [mouse_position, 100, 300]
 etc...
 ```
-it will show a single [mouse_position, *mouse_x, *mouse_y] where mouse_x and mouse_y are constantly updated. This is good for keeping a much cleaner log and only updating log calls instead of showing a stream of log calls
+it will show a single [mouse_position, mouse_x, mouse_y] where mouse_x and mouse_y are constantly updated. This is good for keeping a much cleaner log and only updating log calls instead of showing a stream of log calls
+
+**NOTE**
+if you do not have `spydr.draw()` running it will only show a constant stream of the value information in gamemakers IDE debug console, much like regular `show_debug_message`
 
 .breakpoint(value)
 ---
