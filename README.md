@@ -32,7 +32,8 @@ spydr.breakpoint(value)
 
 spydr.draw()
 ---
-This will draw the spydr debug console. You can change the position by setting `spydr.x` or `spydr.y` wherever you want. You can also call this function using `spydr_draw(x, y)`
+This will draw the spydr debug console at the bottom of the screen. 
+
 
 spydr.enable_callstack()
 ---
