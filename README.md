@@ -50,6 +50,8 @@ call 2 [__obj_test_KeyPress_32] line: 3
 ---
 This will enable additive logging. This means that it will add new log information to the end of old log information (much like how Gamemakers current `show_debug_message()` works)
 
-![Capture](https://user-images.githubusercontent.com/25496262/179115660-0a4e643b-3e12-4a78-83cf-8d75d979baf9.PNG)
 ![Capture2](https://user-images.githubusercontent.com/25496262/179115667-cf313d6b-8b39-4051-8f63-bed08faa0e38.PNG)
+![Capture](https://user-images.githubusercontent.com/25496262/179121125-6efa5076-189a-4a0f-995e-c0a4c04417b8.PNG)
+![Capture2](https://user-images.githubusercontent.com/25496262/179121130-278e955a-9749-4b66-a0ca-b6fec2a07715.PNG)
+
 
