@@ -16,7 +16,7 @@ There are 5 functions included that make debugging much more readable and gives 
 
 With these 5 functions you can input nearly any game maker data into them and get a more readable outcome! For example you can easily print the contents of a struct by typing `spydr.print(my_struct)`.
 
-spydr.log(value)
+.log(value)
 ---
 
 `spydr.log()` will only return a string. This could be useful for drawing text in-game or whatever! `log` is the 'parser' so to speak and is used in conjunction with the other functions. You can also call this function using `spydr_log(value)`
