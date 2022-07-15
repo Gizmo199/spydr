@@ -1,8 +1,8 @@
 {
   "resources": [
-    {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":1,},
+    {"id":{"name":"rm_example","path":"rooms/rm_example/rm_example.yy",},"order":1,},
     {"id":{"name":"lib_spydr","path":"scripts/lib_spydr/lib_spydr.yy",},"order":1,},
-    {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},"order":3,},
+    {"id":{"name":"obj_example","path":"objects/obj_example/obj_example.yy",},"order":3,},
   ],
   "Options": [
     {"name":"HTML5","path":"options/html5/options_html5.yy",},
@@ -21,7 +21,7 @@
     ],
   },
   "RoomOrderNodes": [
-    {"roomId":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},},
+    {"roomId":{"name":"rm_example","path":"rooms/rm_example/rm_example.yy",},},
   ],
   "Folders": [
     {"folderPath":"folders/Spydr.yy","order":5,"resourceVersion":"1.0","name":"Spydr","tags":[],"resourceType":"GMFolder",},

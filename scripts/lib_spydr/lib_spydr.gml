@@ -21,12 +21,18 @@
     function spydr_console() constructor{
         
         // basic setup
-        x = 0;
-        y = room_height-16;
 		additive			= false;
         callstack_enable	= false;
         callstack_depth		= 10;
         main_log = "";
+		ide_log = true;
+		cache   = [];
+		size    = {
+		    x : display_get_gui_width(),
+		    y : display_get_gui_height()
+		}
+		x = 0;
+        y = size.y;
         
         // call stack ban words
         banlist     = [
@@ -88,7 +94,14 @@
             main_log = additive ? main_log + l : l;
             text = string_replace_all(text, linebreak, "\n");
             text = string_replace_all(text, set_default, "");
-            show_debug_message(text);   
+            if ( ide_log ) show_debug_message(text);
+        }
+        cprint = function(value){
+            
+            var text = log(value);
+            array_push(cache, text+"^");
+            
+            if ( ide_log ){ print(value); main_log = ""; cache = []; }
         }
         breakpoint = function(value){
             var l = log(value);
@@ -127,7 +140,7 @@
                         switch(type){
                             case "bool"     : text += ( val ) ? "true" : "false"; break;
                             case "struct"   : text += linebreak+log(val, indent+1); break;
-                            case "array"    : text += "["+ log(val, indent); break;
+                            case "array"    : text += log(val, indent); break;
                             case "undefined": text += "undefined"; break;
                             case "number"   : text += string(val); break;
                             case "method"   : text += "function"; break;
@@ -147,7 +160,7 @@
                     var array = value;
                     var len  = array_length(array);
                     var idt  = ""; repeat(indent) idt += indention;
-                    text += idt;
+                    text += idt+"[";
                     
                     for ( var i=0; i<len; i++ ){
                         
@@ -196,26 +209,31 @@
             main_log = "";
         }
         draw = function(){
+			ide_log = false;
             var col = color.def;
             var w = 0;
             var h = 0;
             
             var _log = main_log;
             var ctxt = "SPYDR CONSOLE:"
-            var ltxt = ctxt+"<struct> struct, <method> method, <array> array, <string> string, <number> number, <bool> boolean, <undefined> undefined^^";
-            _log = ltxt+_log;
+            var ltxt = ctxt+"<struct> struct, <method> method, <array> array, <string> string, <number> number, <bool> boolean, <undefined> undefined<def>^^";
+            var clog = "";
+            for ( var i=0; i<array_length(cache); i++ ){
+                clog += cache[i];
+            }
+            _log = ltxt+clog+_log;
             var ww = room_width;
             
             draw_set_alpha(0.95);
             draw_set_color(c_black);
-            draw_rectangle(0, y-8, room_width, room_height, false);
+            draw_rectangle(0, y-8, size.x, size.y, false);
             draw_set_alpha(1);
             draw_set_color(color.def);
             
             if ( main_log != "" ){
                 draw_set_halign(fa_right);
                 draw_set_valign(fa_top);
-                draw_text(room_width-5, y, "clear log [BACKSPACE]");
+                draw_text(size.x-5, y, "clear log [BACKSPACE]");
             }
             
             for ( var i=1; i<string_length(_log)+1; i++){
@@ -254,8 +272,9 @@
                 }
                 draw_text(x + 5 + (w*8), y + (h * 16), string_replace_all(text, linebreak, ""));
             }
-            y = lerp(y, room_height - ( (h+2) * 16 ), 0.25);
+            y = lerp(y, size.y - ( (h+2) * 16 ), 0.25);
             draw_set_color(color.def);
+            cache = [];
         }
     }
     
