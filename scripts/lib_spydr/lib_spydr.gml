@@ -22,9 +22,10 @@
         
         // basic setup
         x = 0;
-        y = 0;
-        callstack_enable = false;
-        callstack_depth = 10;
+        y = room_height-16;
+		additive			= false;
+        callstack_enable	= false;
+        callstack_depth		= 10;
         main_log = "";
         
         // call stack ban words
@@ -65,6 +66,9 @@
         enable_callstack = function(enabled){
             callstack_enable = enabled;
         }
+		enable_add_logging = function(enabled){
+			additive = enabled;
+		}
         log_callstack = function(){
             var t = "";
             var c = debug_get_callstack(callstack_depth);
@@ -81,7 +85,7 @@
             var t = callstack_enable ? log_callstack() : "";
             var text = t + l;
             
-            main_log = l;
+            main_log = additive ? main_log + l : l;
             text = string_replace_all(text, linebreak, "\n");
             text = string_replace_all(text, set_default, "");
             show_debug_message(text);   
@@ -188,14 +192,31 @@
             // Return string
             return text;
         }
+        clear= function(){
+            main_log = "";
+        }
         draw = function(){
             var col = color.def;
             var w = 0;
             var h = 0;
             
             var _log = main_log;
-            var ltxt = "<struct> struct, <method> method, <array> array, <string> string, <number> number, <bool> boolean, <undefined> undefined^^";
+            var ctxt = "SPYDR CONSOLE:"
+            var ltxt = ctxt+"<struct> struct, <method> method, <array> array, <string> string, <number> number, <bool> boolean, <undefined> undefined^^";
             _log = ltxt+_log;
+            var ww = room_width;
+            
+            draw_set_alpha(0.95);
+            draw_set_color(c_black);
+            draw_rectangle(0, y-8, room_width, room_height, false);
+            draw_set_alpha(1);
+            draw_set_color(color.def);
+            
+            if ( main_log != "" ){
+                draw_set_halign(fa_right);
+                draw_set_valign(fa_top);
+                draw_text(room_width-5, y, "clear log [BACKSPACE]");
+            }
             
             for ( var i=1; i<string_length(_log)+1; i++){
                 var text = "";
@@ -231,8 +252,9 @@
                     h+=1;
                     w=0;
                 }
-                draw_text(x + (w*8), y + (h * 16), string_replace_all(text, linebreak, ""));
+                draw_text(x + 5 + (w*8), y + (h * 16), string_replace_all(text, linebreak, ""));
             }
+            y = lerp(y, room_height - ( (h+2) * 16 ), 0.25);
             draw_set_color(color.def);
         }
     }
@@ -248,9 +270,3 @@ spydr = new spydr_console();
 #macro spydr_print      spydr.print
 #macro spydr_breakpoint spydr.breakpoint
 #macro spydr_log        spydr.log
-#macro spydr_draw       global._drawfunc
-spydr_draw = function(_x, _y){
-    spydr.x = _x;
-    spydr.y = _y;
-    spydr.draw();
-}
